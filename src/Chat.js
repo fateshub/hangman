@@ -39,6 +39,8 @@ const tmi = require('tmi.js');
           console.log("Clean up")
       }}
        );
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+
     },[]);
     return (
         <>
