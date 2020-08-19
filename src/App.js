@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Figure from "./Figure"; // the component for the figure
 import WrongLetter from "./WrongLetter"; //component that handles displaying wrong letters
