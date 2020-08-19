@@ -4,7 +4,7 @@
 
 body {
   background-color: tr;
-  color: black;
+  color: #002651;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
@@ -27,26 +27,31 @@ h1 {
 
 .figure-container {
   fill: transparent;
-  stroke: #2980b9;
-  stroke-width: 4px;
+  stroke: #002651;
+  stroke-width: 10px;
   stroke-linecap: round;
 }
 
-.figure-part {
-  display: none;
-}
+
 
 .wrong-letters-container {
+  background-color: #ffa45c;
+  border-radius:    10px;
   position: absolute;
+  
   top: 20px;
   right: 20px;
   display: flex;
   flex-direction: column;
-  text-align: right;
+  text-align: center;
 }
 
 .wrong-letters-container p {
-  margin: 0 0 5px;
+  z-index: 10;
+position: relative;
+top: -30px;
+font-size: 24px;
+width: fit-content;
 }
 
 .wrong-letters-container span {
@@ -54,15 +59,17 @@ h1 {
 }
 
 .word {
+  background-color: #ffa45c;
+  border-radius:  25px 25px 10px 10px;
   display: flex;
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .letter {
-  border-bottom: 3px solid #2980b9;
+  border-bottom: 3px solid #002651;
   display: inline-flex;
   font-size: 30px;
   align-items: center;

@@ -1,52 +1,65 @@
-import React,{ useEffect} from 'react'
-const tmi = require('tmi.js');
+import React, { useEffect } from "react";
+var ComfyJS = require("comfy.js");
 
+const Chat = ({
+  setSelectedword,
+  channel,
+  setPlayable,
+  playable,
+  wrongLetters,
+  selectedWord,
+  correctLetters,
+  setCorrectLetters,
+  setWrongLetters,
+}) => {
+  // init tmi
 
- 
-        
-
- const Chat = ({channel , playable ,wrongLetters, selectedWord, correctLetters, setCorrectLetters, setWrongLetters }) => {
-    // init tmi 
-    const client = new tmi.Client({
-        connection: {
-            secure: true,
-            reconnect: true
-        },
-        channels: [ channel ]
-    });
-    // connect tmi 
-    client.connect();
-
-    useEffect(() => {
-        //listen for chat message
-    client.on('message', (channel, tags, message, self) => {
-//process the message
-        if(playable && message.length === 1){
-            const letter = message.toLowerCase();
-            if ( selectedWord.includes(letter) ) {
-              if (!correctLetters.includes(letter)) {
-                setCorrectLetters(currentLetters => [...currentLetters, letter]);
-              } 
-            } else {
-              if ( !wrongLetters.includes(letter)) {
-                setWrongLetters(currentLetters => [...currentLetters, letter]);
-              } 
-            }
+  // connect tmi
+  // eslint-disable-next-line
+  useEffect(() => {
+    //listen for chat message
+    ComfyJS.onChat = (user, message, flags, self, extra) => {
+      //process the message
+      if (playable && message.length === 1) {
+        const letter = message.toLowerCase();
+        if (selectedWord.includes(letter)) {
+          if (!correctLetters.includes(letter)) {
+            setCorrectLetters((currentLetters) => [...currentLetters, letter]);
+          }
+        } else {
+          if (!wrongLetters.includes(letter)) {
+            setWrongLetters((currentLetters) => [...currentLetters, letter]);
+          }
         }
+      }
+    };
+    return () => {};
+    // eslint-disable-next-line
+  }, [playable, selectedWord]);
 
-        
-      return () => {
-          console.log("Clean up")
-      }}
-       );
-       // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    ComfyJS.onCommand = (user, command, message, flags, extra) => {
+      if (flags.broadcaster && command === "startgame") {
+        setCorrectLetters([]);
+        setWrongLetters([]);
+        setSelectedword(message);
+        setPlayable(true);
+        console.log(playable);
+        console.log(message);
+      }
+    };
 
-    },[]);
-    return (
-        <>
-            
-        </>
-    )
-}
+    return () => {};
+    // eslint-disable-next-line
+  }, [setSelectedword]);
 
-export default Chat
+  useEffect(() => {
+    ComfyJS.Init(channel);
+    return () => {};
+    // eslint-disable-next-line
+  }, []);
+
+  return <></>;
+};
+
+export default Chat;
