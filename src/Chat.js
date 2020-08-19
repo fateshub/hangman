@@ -39,7 +39,7 @@ const Chat = ({
 
   useEffect(() => {
     ComfyJS.onCommand = (user, command, message, flags, extra) => {
-      if ((flags.broadcaster && flags.mod) && command === "startgame") {
+      if ((flags.broadcaster || flags.mod) && command === "startgame") {
         setCorrectLetters([]);
         setWrongLetters([]);
         setSelectedword(message.toLowerCase());
