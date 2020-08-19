@@ -42,10 +42,10 @@ const Chat = ({
       if (flags.broadcaster && command === "startgame") {
         setCorrectLetters([]);
         setWrongLetters([]);
-        setSelectedword(message);
+        setSelectedword(message.toLowerCase());
         setPlayable(true);
         console.log(playable);
-        console.log(message);
+        console.log(message.toLowerCase());
       }
     };
 
