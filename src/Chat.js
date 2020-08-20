@@ -38,8 +38,9 @@ const Chat = ({
   }, [playable, selectedWord]);
 
   useEffect(() => {
-    ComfyJS.onCommand = (user, command, message, flags, extra) => {
-      if ((flags.broadcaster || flags.mod) && command === "startgame") {
+    ComfyJS.onWhisper = ( user, message, flags, self, extra )
+=> {
+      if ((flags.broadcaster)) {
         ComfyJS.Say( "lol :)" );
         setCorrectLetters([]);
         setWrongLetters([]);
@@ -55,7 +56,7 @@ const Chat = ({
   }, [setSelectedword]);
 
   useEffect(() => {
-    ComfyJS.Init( process.env.REACT_APP_TWITCHUSER, process.env.REACT_APP_OAUTH  ,null, channel);
+    ComfyJS.Init( process.env.REACT_APP_TWITCHUSER, process.env.REACT_APP_OAUTH, null , channel);
     return () => {};
     // eslint-disable-next-line
   }, []);
