@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 var ComfyJS = require("comfy.js");
+require('dotenv').config()
 
 const Chat = ({
   setSelectedword,
@@ -40,6 +41,7 @@ const Chat = ({
   useEffect(() => {
     ComfyJS.onCommand = (user, command, message, flags, extra) => {
       if ((flags.broadcaster || flags.mod) && command === "startgame") {
+        ComfyJS.Say( "lol :)" );
         setCorrectLetters([]);
         setWrongLetters([]);
         setSelectedword(message.toLowerCase());
@@ -54,7 +56,7 @@ const Chat = ({
   }, [setSelectedword]);
 
   useEffect(() => {
-    ComfyJS.Init(channel);
+    ComfyJS.Init( channel, process.env.OAUTH );
     return () => {};
     // eslint-disable-next-line
   }, []);
