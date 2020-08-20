@@ -39,8 +39,7 @@ const Chat = ({
 
   useEffect(() => {
     ComfyJS.onWhisper = ( user, message, flags, self, extra ) => {
-      if (user.toLowerCase() === channel.toLowerCase() ) {
-        ComfyJS.Say( message );
+      if (flags.broadcaster) {
         setCorrectLetters([]);
         setWrongLetters([]);
         setSelectedword(message.toLowerCase());
@@ -55,7 +54,7 @@ const Chat = ({
   }, [setSelectedword]);
 
   useEffect(() => {
-    ComfyJS.Init( process.env.REACT_APP_OAUTH ,null, channel);
+    ComfyJS.Init( process.env.REACT_APP_OAUTH , null , channel);
     return () => {};
     // eslint-disable-next-line
   }, []);
