@@ -10,17 +10,18 @@ const End = ({correctLetters, wrongLetters, selectedWord, setPlayable}) => {
     if( selectedWord.length >0 && checkWin(correctLetters, wrongLetters, selectedWord) === 'win' ) {
       finalMessage = 'Chat is 5Head';
       playable = false;
-      setTimeout(function(){  document.getElementsByClassName("popup-container").style.display = "block";}, 3000);
+      setTimeout(function(){  document.getElementsByClassName("popup-container").style.display = "none";}, 3000);
 
     } else if( checkWin(correctLetters, wrongLetters, selectedWord) === 'lose' ) {
       finalMessage = 'Chat Sucks lol';
       finalMessageRevealWord = `the word was: ${selectedWord}`;
       playable = false;
-      setTimeout(function(){       document.getElementsByClassName("popup-container").style.display = "block";
+      setTimeout(function(){       document.getElementsByClassName("popup-container").style.display = "none";
     }, 3000);
     }
     else{
         playable = true;
+        document.getElementsByClassName("popup-container").style.display = "block";
     }
   
     useEffect(() => {
