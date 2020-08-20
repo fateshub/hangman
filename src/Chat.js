@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 var ComfyJS = require("comfy.js");
-require('dotenv').config()
 
 const Chat = ({
   setSelectedword,
@@ -56,7 +55,7 @@ const Chat = ({
   }, [setSelectedword]);
 
   useEffect(() => {
-    ComfyJS.Init( channel, process.env.OAUTH );
+    ComfyJS.Init( process.env.REACT_APP_TWITCHUSER, process.env.REACT_APP_OAUTH );
     return () => {};
     // eslint-disable-next-line
   }, []);
