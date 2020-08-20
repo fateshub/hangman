@@ -8,12 +8,16 @@ const End = ({correctLetters, wrongLetters, selectedWord, setPlayable}) => {
     let playable = false;
   
     if( selectedWord.length >0 && checkWin(correctLetters, wrongLetters, selectedWord) === 'win' ) {
-      finalMessage = 'Congratulations! You won! 😃';
+      finalMessage = 'Chat is 5Head';
       playable = false;
+      setTimeout(function(){ alert("Hello"); }, 3000);
+
     } else if( checkWin(correctLetters, wrongLetters, selectedWord) === 'lose' ) {
-      finalMessage = 'Unfortunately you lost. 😕';
-      finalMessageRevealWord = `...the word was: ${selectedWord}`;
+      finalMessage = 'Chat Sucks lol';
+      finalMessageRevealWord = `the word was: ${selectedWord}`;
       playable = false;
+      setTimeout(function(){ alert("Hello"); }, 3000);
+      document.getElementsByClassName("popup-container").style.display = "block";
     }
     else{
         playable = true;
@@ -22,7 +26,7 @@ const End = ({correctLetters, wrongLetters, selectedWord, setPlayable}) => {
     useEffect(() => {
       setPlayable(playable);
     });
-  
+    
     return (
       <div className="popup-container" style={finalMessage !== '' ? {display:'flex'} : {}}>
         <div className="popup">
