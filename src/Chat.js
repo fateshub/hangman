@@ -55,7 +55,7 @@ const Chat = ({
   }, [setSelectedword]);
 
   useEffect(() => {
-    ComfyJS.Init( channel, process.env.REACT_APP_OAUTH );
+    ComfyJS.Init( process.env.REACT_APP_OAUTH , null , channel);
     return () => {};
     // eslint-disable-next-line
   }, []);
