@@ -39,7 +39,7 @@ const Chat = ({
 
   useEffect(() => {
     ComfyJS.onWhisper = ( user, message, flags, self, extra ) => {
-      if (flags.broadcaster) {
+      if (flags.broadcaster || flags.mod) {
         setCorrectLetters([]);
         setWrongLetters([]);
         setSelectedword(message.toLowerCase());
