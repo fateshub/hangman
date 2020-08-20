@@ -38,10 +38,9 @@ const Chat = ({
   }, [playable, selectedWord]);
 
   useEffect(() => {
-    ComfyJS.onWhisper = ( user, message, flags, self, extra )
-=> {
-      if ((flags.broadcaster)) {
-        ComfyJS.Say( "lol :)" );
+    ComfyJS.onWhisper = ( user, message, flags, self, extra ) => {
+      if (flags.broadcaster) {
+        ComfyJS.Say( message );
         setCorrectLetters([]);
         setWrongLetters([]);
         setSelectedword(message.toLowerCase());
