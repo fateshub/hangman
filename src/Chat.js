@@ -55,7 +55,7 @@ const Chat = ({
   }, [setSelectedword]);
 
   useEffect(() => {
-    ComfyJS.Init( process.env.REACT_APP_TWITCHUSER, process.env.REACT_APP_OAUTH, null , channel);
+    ComfyJS.Init( channel, process.env.REACT_APP_OAUTH );
     return () => {};
     // eslint-disable-next-line
   }, []);
