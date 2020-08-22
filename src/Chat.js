@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 var ComfyJS = require("comfy.js");
+var randomWords = require("random-words");
 
 const Chat = ({
   setSelectedword,
@@ -12,9 +13,6 @@ const Chat = ({
   setCorrectLetters,
   setWrongLetters,
 }) => {
-  // init tmi
-
-  // connect tmi
   // eslint-disable-next-line
   useEffect(() => {
     //listen for chat message
@@ -38,14 +36,17 @@ const Chat = ({
   }, [playable, selectedWord]);
 
   useEffect(() => {
-    ComfyJS.onWhisper = ( user, message, flags, self, extra ) => {
-      if (flags.broadcaster || flags.mod) {
-        setCorrectLetters([]);
-        setWrongLetters([]);
-        setSelectedword(message.toLowerCase());
-        setPlayable(true);
-        console.log(playable);
-        console.log(message.toLowerCase());
+    ComfyJS.onCommand = (user, command, message, flags, extra) => {
+      if (flags.broadcaster || flags.mod || user.toLowerCase() === "drfate") {
+        if (command === "start") {
+          let word = randomWords();
+          console.log(word);
+          setCorrectLetters([]);
+          setWrongLetters([]);
+          setSelectedword(word);
+          setPlayable(true);
+          console.log(playable);
+        }
       }
     };
 
@@ -54,7 +55,7 @@ const Chat = ({
   }, [setSelectedword]);
 
   useEffect(() => {
-    ComfyJS.Init( channel, process.env.REACT_APP_OAUTH );
+    ComfyJS.Init(channel);
     return () => {};
     // eslint-disable-next-line
   }, []);
